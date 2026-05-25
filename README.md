@@ -6,11 +6,7 @@ The output is exactly **1584 × 396 px** — LinkedIn's recommended cover photo 
 
 ## Demo
 
-Open `index.html` in any modern browser, or — once GitHub Pages is enabled for this repo — visit:
-
-```
-https://nayafyt.github.io/pi-typewriter/
-```
+Live at **<https://nayafyt.github.io/pi-typewriter/>**, or open `index.html` in any modern browser.
 
 ## What it does
 
