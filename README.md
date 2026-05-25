@@ -6,7 +6,7 @@ The output is exactly **1584 × 396 px** — LinkedIn's recommended cover photo 
 
 ## Demo
 
-Live at **<https://nayafyt.com/projects/typewriter/>**, or open `index.html` in any modern browser.
+Open `index.html` in any modern browser.
 
 ## What it does
 
