@@ -61,6 +61,7 @@
     opacity: 0.85;
   }
   #stage {
+    position: relative;
     width: 1584px;
     max-width: 95vw;
     aspect-ratio: 1584 / 396;
@@ -100,9 +101,9 @@
     color: var(--tw-muted);
   }
   .theme-toggle {
-    position: fixed;
-    top: 16px;
-    right: 16px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
     width: 36px;
     height: 36px;
     padding: 0;
@@ -115,7 +116,7 @@
     justify-content: center;
     cursor: pointer;
     transition: color 0.2s ease;
-    z-index: 50;
+    z-index: 10;
   }
   .theme-toggle:hover {
     background: transparent;
@@ -129,9 +130,11 @@
 </style>
 </head>
 <body>
-  <button id="theme" class="theme-toggle" aria-label="Toggle theme"></button>
   <h1>π Typewriter · 1584 × 396</h1>
-  <div id="stage"><canvas id="cover" width="1584" height="396"></canvas></div>
+  <div id="stage">
+    <canvas id="cover" width="1584" height="396"></canvas>
+    <button id="theme" class="theme-toggle" aria-label="Toggle theme"></button>
+  </div>
   <div class="controls">
     <button id="save">Download PNG</button>
     <button id="restart">Restart</button>
