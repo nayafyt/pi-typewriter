@@ -99,9 +99,37 @@
     letter-spacing: 1px;
     color: var(--tw-muted);
   }
+  .theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--tw-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 50;
+  }
+  .theme-toggle:hover {
+    background: transparent;
+    box-shadow: none;
+    color: var(--tw-accent);
+  }
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
 </style>
 </head>
 <body>
+  <button id="theme" class="theme-toggle" aria-label="Toggle theme"></button>
   <h1>π Typewriter · 1584 × 396</h1>
   <div id="stage"><canvas id="cover" width="1584" height="396"></canvas></div>
   <div class="controls">
@@ -111,7 +139,6 @@
     <button id="palette">Palette</button>
     <button id="density">Density</button>
     <button id="speed">Speed</button>
-    <button id="theme">Theme</button>
   </div>
   <div class="hint" id="src">loading…</div>
 
@@ -315,10 +342,24 @@
 
   // --- Theme syncing with the portfolio site ---
   // The site palette repaints when the theme changes; other palettes stay put.
+  const SUN_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
+  const MOON_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+
+  const themeBtn = document.getElementById('theme');
+
+  function renderThemeIcon() {
+    const isDark = document.documentElement.classList.contains('dark');
+    themeBtn.innerHTML = isDark ? SUN_ICON : MOON_ICON;
+    themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
   function applyTheme(theme) {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    renderThemeIcon();
     if (PALETTES[palIdx].dynamic) setup();
   }
+
+  renderThemeIcon();
 
   // Live-update when the portfolio toggles theme in another tab.
   window.addEventListener('storage', (e) => {
@@ -342,7 +383,7 @@
     spdIdx = (spdIdx + 1) % SPEEDS.length;
   };
 
-  document.getElementById('theme').onclick = () => {
+  themeBtn.onclick = () => {
     const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
     localStorage.setItem('theme', next);
     applyTheme(next);
